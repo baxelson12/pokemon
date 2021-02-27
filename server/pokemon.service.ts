@@ -55,9 +55,7 @@ export class PokemonService {
    * Starts the enrollee service
    */
   async start(): Promise<void> {
-    console.log(
-      Colors.blue(`Code challenge server running on port ${this.port}`)
-    );
+    console.log(Colors.blue(`Server running on port ${this.port}`));
     await this.application.listen({ port: this.port });
   }
 }

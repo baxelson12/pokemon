@@ -51,7 +51,7 @@ Deno.test('Get a specific pokemon -- success response', () => {
   assertEquals((ctx.response.body as any).id, ctx.params.id);
 });
 
-Deno.teset('Get a specific pokemon -- no ID', () => {
+Deno.test('Get a specific pokemon -- no ID', () => {
   validateGetError(undefined, 400, 'Please supply a pokemon id');
 });
 
