@@ -68,7 +68,7 @@ Deno.test('Get a specific pokemon -- no matching ID', () => {
 async function validateServiceStarted(
   expectedPort: number,
   port: number = 8080
-) {
+): Promise<void> {
   const service: PokemonService = new PokemonService(port);
   const application: Application = service['application'];
   const listenStub: Stub<Application> = stub(application, 'listen', [
@@ -99,7 +99,7 @@ function validateGetError(
   id: number | undefined,
   statusCode: number,
   errorMessage: string | undefined
-) {
+): void {
   const service: PokemonService = new PokemonService();
   const context: RouterContext = {
     params: {
