@@ -26,7 +26,7 @@ const detailReducer = createReducer(
   // Begin load
   on(DetailActions.loadDetails, (state) => ({
     ...state,
-    loading: false,
+    loading: true,
     loaded: false
   })),
   // Loading failed
