@@ -12,6 +12,7 @@ export type State = PokemonBase &
 export const initial: State = {
   id: null,
   name: '',
+  image: '',
   height: null,
   weight: null,
   type: null,
