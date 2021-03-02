@@ -15,6 +15,10 @@ import { reducers } from './store/reducers';
 import { effects } from './store/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './core/services/data.service';
+import { ToolbarModule } from './core/components/toolbar/toolbar.module';
+import { BadNavModule } from './shared/components/nav/nav.module';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { PokemonModule } from './core/components/pokemon/pokemon.module';
 
 export const metaReducers: MetaReducer<{}>[] = !environment.production
   ? [storeFreeze]
@@ -34,7 +38,11 @@ export const metaReducers: MetaReducer<{}>[] = !environment.production
     StoreRouterConnectingModule.forRoot({
       serializer: ParamSerializer
     }),
-    HttpClientModule
+    HttpClientModule,
+    ToolbarModule,
+    BadNavModule,
+    AngularSvgIconModule.forRoot(),
+    PokemonModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
