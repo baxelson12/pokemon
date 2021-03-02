@@ -24,6 +24,6 @@ export class AllComponent {
     Selectors.filterPokemon
   );
 
-  animationConfig = (i: number) => ({ value: '', params: { delay: i * 50 } });
+  animationConfig = (i: number) => ({ value: '', params: { delay: i * 25 } });
   constructor(private store: Store, private r: Renderer2) {}
 }
