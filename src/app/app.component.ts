@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import * as Actions from './store/actions';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'pokemon';
+
+  constructor(private store: Store) {
+    this.store.dispatch(Actions.loadPokemon());
+  }
 }
