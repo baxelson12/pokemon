@@ -1,7 +1,11 @@
 @import 'variables', 'mixins';
 
 $card-padding: $padding;
-$card-width: 335px;
+
+:host {
+  display: flex;
+  justify-content: center;
+}
 
 h2 {
   font-size: 1.125rem;

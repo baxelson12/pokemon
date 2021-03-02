@@ -7,7 +7,7 @@ import { SortDescending } from '../../shared/utils/sort';
 // Base model
 export interface State extends EntityState<PokemonBase> {
   selectedPokemonId: number | null;
-  loading: boolean;
+  loading: null[];
   loaded: boolean;
   sortBy: string;
   query: string;
@@ -36,7 +36,7 @@ export const initial: State = adapter.getInitialState({
   selectedPokemonId: null,
   sortBy: 'nameDesc',
   query: '',
-  loading: false,
+  loading: [],
   loaded: false
 });
 
@@ -44,12 +44,15 @@ export const pokemonReducer = createReducer(
   // Initial state
   initial,
   // Begin load
-  on(PokemonActions.loadPokemon, (state) => ({ ...state, loading: true })),
+  on(PokemonActions.loadPokemon, (state) => ({
+    ...state,
+    loading: [].constructor(20)
+  })),
   // Loading failed
-  on(PokemonActions.loadPokemonFail, (state) => ({ ...state, loading: false })),
+  on(PokemonActions.loadPokemonFail, (state) => ({ ...state, loading: [] })),
   // Loaded
   on(PokemonActions.loadPokemonSuccess, (state, { pokemon }) =>
-    adapter.setAll(pokemon, { ...state, loaded: true, loading: false })
+    adapter.setAll(pokemon, { ...state, loaded: true, loading: [] })
   ),
   // Select Pokemon
   on(PokemonActions.selectPokemon, (state, { id }) => ({

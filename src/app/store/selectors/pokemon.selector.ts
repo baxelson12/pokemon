@@ -62,3 +62,9 @@ export const isPokemonLoaded = createSelector(
   selectPokemonState,
   (state) => state.loaded
 );
+
+// Loading?
+export const pokemonLoading = createSelector(
+  selectPokemonState,
+  (state) => state.loading
+);
