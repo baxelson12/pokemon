@@ -2,6 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { PokemonBase } from '../../core/interfaces/PokemonBase';
 import * as PokemonActions from '../actions/pokemon.actions';
+import { SortDescending } from '../../shared/utils/sort';
 
 // Base model
 export interface State extends EntityState<PokemonBase> {
@@ -9,6 +10,7 @@ export interface State extends EntityState<PokemonBase> {
   loading: boolean;
   loaded: boolean;
   sortBy: string;
+  query: string;
 }
 
 // Get selected pokemon ID
@@ -17,15 +19,15 @@ export function selectPokemonId(p: PokemonBase): number {
 }
 
 // Default sort by
-// export function sortPriceDesc(a: PokemonBase, b: PokemonBase): number {
-//     return SortDescending(a.name, b.name);
-// }
+export function sortNameDesc(a: PokemonBase, b: PokemonBase): number {
+  return SortDescending(a.name, b.name);
+}
 
 // Generate adapter
 export const adapter: EntityAdapter<PokemonBase> = createEntityAdapter<PokemonBase>(
   {
-    selectId: selectPokemonId
-    // sortComparer: sortPriceDesc
+    selectId: selectPokemonId,
+    sortComparer: sortNameDesc
   }
 );
 
@@ -33,6 +35,7 @@ export const adapter: EntityAdapter<PokemonBase> = createEntityAdapter<PokemonBa
 export const initial: State = adapter.getInitialState({
   selectedPokemonId: null,
   sortBy: 'nameDesc',
+  query: '',
   loading: false,
   loaded: false
 });
@@ -59,7 +62,11 @@ export const pokemonReducer = createReducer(
     selectedPokemonId: null
   })),
   // Change sort
-  on(PokemonActions.selectSort, (state, { sortBy }) => ({ ...state, sortBy }))
+  on(PokemonActions.selectSort, (state, { sortBy }) => ({ ...state, sortBy })),
+  // Change sort
+  on(PokemonActions.sortBy, (state, { sortBy }) => ({ ...state, sortBy })),
+  // Change query
+  on(PokemonActions.queryBy, (state, { query }) => ({ ...state, query }))
 );
 
 export function reducer(state: State | undefined, action: Action): State {

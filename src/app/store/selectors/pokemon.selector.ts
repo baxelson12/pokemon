@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { PokemonBase } from '../../core/interfaces/PokemonBase';
 import { SortAscending, SortDescending } from '../../shared/utils/sort';
 
 import * as FromReducer from '../reducers/pokemon.reducer';
@@ -33,12 +34,12 @@ export const selectedPokemon = createSelector(
 );
 
 // Filter by query
-// export const filterPokemons = createSelector(
-//   selectAllPokemons,
-//   selectPokemonState,
-//   (arr: Pokemon[], state: FromReducer.State) =>
-//     arr.filter((v) => v.name.toLowerCase().includes(state.query.toLowerCase()))
-// );
+export const filterPokemons = createSelector(
+  selectAllPokemon,
+  selectPokemonState,
+  (arr: PokemonBase[], state: FromReducer.State) =>
+    arr.filter((v) => v.name.toLowerCase().includes(state.query.toLowerCase()))
+);
 
 // Sorted array
 export const selectSortedPokemons = createSelector(

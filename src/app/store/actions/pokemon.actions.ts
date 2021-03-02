@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { PokemonBase } from '../../core/interfaces/PokemonBase';
+import { SortBy } from '../../shared/types/sortBy';
 
 // Load base Pokemon
 export const LOAD_POKEMON = '[Pokemon] Load pokemon.';
@@ -29,3 +30,11 @@ export const selectSort = createAction(
   SELECT_SORT,
   props<{ sortBy: string }>()
 );
+
+// Change sort
+export const SORT_BY = '[Pokemon] Change sort.';
+export const sortBy = createAction(SORT_BY, props<{ sortBy: SortBy }>());
+
+// Query change
+export const QUERY_BY = '[Pokemon] Change query.';
+export const queryBy = createAction(QUERY_BY, props<{ query: string }>());
