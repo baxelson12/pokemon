@@ -1,6 +1,6 @@
 @import 'variables', 'mixins';
 
-$card-padding: 0.75rem;
+$card-padding: $padding;
 $card-width: 335px;
 
 h2 {
