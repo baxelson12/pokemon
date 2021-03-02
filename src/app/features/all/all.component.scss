@@ -1,18 +1,9 @@
 @import 'variables', 'mixins';
 
-// I could use grid...
+$min: calc(#{$card-width} + 0.5rem);
+
 .wrapper {
-  display: flex;
-  flex-flow: row wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min, 1fr));
   gap: 1.25rem;
-  justify-content: center;
-
-  @include lg() {
-    justify-content: space-between;
-  }
-}
-
-app-pokemon:nth-child(4n) {
-  page-break-after: always;
-  break-after: always;
 }
