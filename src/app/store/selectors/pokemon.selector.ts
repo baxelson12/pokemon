@@ -50,7 +50,7 @@ export const selectSortedPokemon = createSelector(
 );
 
 // Filter by query
-export const filterPokemons = createSelector(
+export const filterPokemon = createSelector(
   selectSortedPokemon,
   selectPokemonState,
   (arr: PokemonBase[], state: FromReducer.State) =>

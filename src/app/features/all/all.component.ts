@@ -21,7 +21,7 @@ import * as Selectors from '../../store/selectors';
 export class AllComponent {
   loading$: Observable<null[]> = this.store.select(Selectors.pokemonLoading);
   pokemon$: Observable<PokemonBase[]> = this.store.select(
-    Selectors.selectSortedPokemon
+    Selectors.filterPokemon
   );
 
   animationConfig = (i: number) => ({ value: '', params: { delay: i * 50 } });
