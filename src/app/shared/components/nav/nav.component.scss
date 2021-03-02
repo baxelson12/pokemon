@@ -1,0 +1,19 @@
+@import 'variables', 'mixins';
+
+.nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem $body-margin-sm;
+  margin: 0 -#{$body-margin-sm};
+  background-color: $red;
+  box-shadow: $shadow-lg;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: $white;
+
+  @include sm() {
+    margin: 0 -#{$body-margin-lg};
+    padding: 0.75rem $body-margin-lg;
+  }
+}
