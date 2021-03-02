@@ -45,6 +45,7 @@ h2 {
   background-color: $red;
   height: 1.75rem;
   width: 1.75rem;
+  font-size: 0.6rem;
   @include flex-center();
   color: $white;
 }

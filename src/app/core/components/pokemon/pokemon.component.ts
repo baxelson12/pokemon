@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PokemonBase } from '../../interfaces/PokemonBase';
 
 @Component({
   selector: 'app-pokemon',
@@ -6,9 +7,6 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./pokemon.component.scss']
 })
 export class PokemonComponent {
-  @Input() name: string;
-  @Input() id: number;
-  @Input() type: string;
-  @Input() img: string;
+  @Input() pokemon: PokemonBase;
   @Input() loading: boolean;
 }

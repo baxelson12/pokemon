@@ -33,16 +33,8 @@ export const selectedPokemon = createSelector(
   (state: FromReducer.State) => state.entities[state.selectedPokemonId]
 );
 
-// Filter by query
-export const filterPokemons = createSelector(
-  selectAllPokemon,
-  selectPokemonState,
-  (arr: PokemonBase[], state: FromReducer.State) =>
-    arr.filter((v) => v.name.toLowerCase().includes(state.query.toLowerCase()))
-);
-
 // Sorted array
-export const selectSortedPokemons = createSelector(
+export const selectSortedPokemon = createSelector(
   selectAllPokemon,
   selectPokemonState,
   (array, state) => {
@@ -55,4 +47,18 @@ export const selectSortedPokemons = createSelector(
       }
     }
   }
+);
+
+// Filter by query
+export const filterPokemons = createSelector(
+  selectSortedPokemon,
+  selectPokemonState,
+  (arr: PokemonBase[], state: FromReducer.State) =>
+    arr.filter((v) => v.name.toLowerCase().includes(state.query.toLowerCase()))
+);
+
+// Loaded?
+export const isPokemonLoaded = createSelector(
+  selectPokemonState,
+  (state) => state.loaded
 );

@@ -1,10 +1,15 @@
-<bad-card [img]="img" [id]="id" [name]="name" [loading]="loading">
+<bad-card
+  [img]="pokemon.image"
+  [id]="pokemon.id"
+  [name]="pokemon.name"
+  [loading]="loading"
+>
   <ng-container top>
     <button bad-btn-ico role="button">
       <svg-icon src="assets/svg/info.svg"></svg-icon>
     </button>
   </ng-container>
   <ng-container content>
-    <span>Type: {{ type }}</span>
+    <span>Type: {{ pokemon.type }}</span>
   </ng-container>
 </bad-card>
