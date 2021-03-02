@@ -12,6 +12,9 @@ import { ParamSerializer } from './store/serializers/param.serializer';
 import { storeFreeze } from 'ngrx-store-freeze';
 
 import { reducers } from './store/reducers';
+import { effects } from './store/effects';
+import { HttpClientModule } from '@angular/common/http';
+import { DataService } from './core/services/data.service';
 
 export const metaReducers: MetaReducer<{}>[] = !environment.production
   ? [storeFreeze]
@@ -27,12 +30,13 @@ export const metaReducers: MetaReducer<{}>[] = !environment.production
       maxAge: 25,
       logOnly: environment.production
     }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot(effects),
     StoreRouterConnectingModule.forRoot({
       serializer: ParamSerializer
-    })
+    }),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
