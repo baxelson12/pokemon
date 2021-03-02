@@ -20,6 +20,7 @@ import { BadNavModule } from './shared/components/nav/nav.module';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { PokemonModule } from './core/components/pokemon/pokemon.module';
 import { BadModalModule } from './shared/components/modal/modal.module';
+import { BadRadarModule } from './shared/components/radar/radar.module';
 
 export const metaReducers: MetaReducer<{}>[] = !environment.production
   ? [storeFreeze]
@@ -44,7 +45,8 @@ export const metaReducers: MetaReducer<{}>[] = !environment.production
     BadNavModule,
     AngularSvgIconModule.forRoot(),
     PokemonModule,
-    BadModalModule
+    BadModalModule,
+    BadRadarModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
