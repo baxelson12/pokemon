@@ -10,4 +10,5 @@ export class PokemonComponent {
   @Input() id: number;
   @Input() type: string;
   @Input() img: string;
+  @Input() loading: boolean;
 }

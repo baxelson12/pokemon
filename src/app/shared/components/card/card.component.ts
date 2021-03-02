@@ -9,4 +9,5 @@ export class CardComponent {
   @Input() id: number;
   @Input() name: string;
   @Input() img: string;
+  @Input() loading: boolean;
 }

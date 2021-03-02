@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" *ngIf="!loading">
   <div class="top">
     <ng-content select="[top]"></ng-content>
   </div>
@@ -13,5 +13,12 @@
       </div>
       <ng-content select="[content]"></ng-content>
     </div>
+  </div>
+</div>
+
+<div class="card" *ngIf="loading">
+  <div class="top"></div>
+  <div class="media">
+    <list-content-loader></list-content-loader>
   </div>
 </div>
