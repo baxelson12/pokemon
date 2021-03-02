@@ -1,0 +1,62 @@
+@import 'variables', 'mixins';
+
+$card-padding: 0.75rem;
+$card-width: 335px;
+
+h2 {
+  font-size: 1.125rem;
+  color: $black;
+  font-weight: bold;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: $card-padding;
+  background-color: $white;
+  border-radius: $radius;
+  box-shadow: $shadow-md;
+  @include sm() {
+    box-sizing: content-box;
+    width: $card-width;
+  }
+}
+
+.media {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.img {
+  & > img {
+    width: 96px;
+    height: 96px;
+  }
+}
+
+.title {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.number {
+  border-radius: 50%;
+  background-color: $red;
+  height: 1.75rem;
+  width: 1.75rem;
+  @include flex-center();
+  color: $white;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: $gray-500;
+}
+
+.top {
+  display: flex;
+  justify-content: flex-end;
+}

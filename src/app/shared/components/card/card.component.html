@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="top">
+    <ng-content select="[top]"></ng-content>
+  </div>
+  <div class="media">
+    <div class="img">
+      <img [src]="img" />
+    </div>
+    <div class="content">
+      <div class="title">
+        <div class="number">#{{ id }}</div>
+        <h2>{{ name | titlecase }}</h2>
+      </div>
+      <ng-content select="[content]"></ng-content>
+    </div>
+  </div>
+</div>
