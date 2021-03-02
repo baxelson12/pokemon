@@ -33,7 +33,7 @@ export const adapter: EntityAdapter<PokemonBase> = createEntityAdapter<PokemonBa
 export const initial: State = adapter.getInitialState({
   selectedPokemonId: null,
   sortBy: 'nameDesc',
-  loading: true,
+  loading: false,
   loaded: false
 });
 

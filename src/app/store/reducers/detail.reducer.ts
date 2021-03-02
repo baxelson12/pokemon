@@ -1,5 +1,4 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { PokemonBase } from '../../core/interfaces/PokemonBase';
 import { PokemonDetailed } from '../../core/interfaces/PokemonDetailed';
 import * as DetailActions from '../actions/detail.actions';
@@ -17,7 +16,7 @@ export const initial: State = {
   weight: null,
   type: null,
   stats: null,
-  loading: true,
+  loading: false,
   loaded: false
 };
 
