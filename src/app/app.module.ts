@@ -19,6 +19,7 @@ import { ToolbarModule } from './core/components/toolbar/toolbar.module';
 import { BadNavModule } from './shared/components/nav/nav.module';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { PokemonModule } from './core/components/pokemon/pokemon.module';
+import { BadModalModule } from './shared/components/modal/modal.module';
 
 export const metaReducers: MetaReducer<{}>[] = !environment.production
   ? [storeFreeze]
@@ -42,7 +43,8 @@ export const metaReducers: MetaReducer<{}>[] = !environment.production
     ToolbarModule,
     BadNavModule,
     AngularSvgIconModule.forRoot(),
-    PokemonModule
+    PokemonModule,
+    BadModalModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
