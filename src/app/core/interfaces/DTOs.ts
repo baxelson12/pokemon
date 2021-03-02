@@ -13,7 +13,11 @@ export interface PokemonDTO {
 export interface PokemonDetailDTO {
   height: number;
   weight: number;
-  stats: PokemonStatDTO;
+  stats: PokemonStatDTO[];
+  name: string;
+  id: number;
+  types: { type: { name: string } }[];
+  sprites: { front_default: string };
 }
 
 export interface PokemonStatDTO {
