@@ -4,6 +4,7 @@ import * as actions from '../actions/detail.actions';
 const mockDetails: Omit<fromReducer.State, 'loading' | 'loaded'> = {
   id: 1,
   name: 'Bulbasaur',
+  image: '',
   height: 10,
   weight: 150,
   type: 'Grass',

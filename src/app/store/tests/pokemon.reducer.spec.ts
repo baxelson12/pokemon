@@ -5,7 +5,8 @@ import { PokemonBase } from '../../core/interfaces/PokemonBase';
 const mockPokemon: PokemonBase = {
   id: 1,
   name: 'Bulbasaur',
-  type: 'Grass'
+  type: 'Grass',
+  image: ''
 };
 
 describe('PokemonReducer', () => {
