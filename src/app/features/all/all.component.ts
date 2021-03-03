@@ -19,11 +19,14 @@ import * as Selectors from '../../store/selectors';
   ]
 })
 export class AllComponent {
+  // Loading state
   loading$: Observable<null[]> = this.store.select(Selectors.pokemonLoading);
+  // Actual
   pokemon$: Observable<PokemonBase[]> = this.store.select(
     Selectors.filterPokemon
   );
 
+  // For staggering
   animationConfig = (i: number) => ({ value: '', params: { delay: i * 25 } });
   constructor(private store: Store, private r: Renderer2) {}
 }
