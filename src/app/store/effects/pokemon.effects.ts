@@ -1,12 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { environment } from '../../../environments/environment';
 import { Store } from '@ngrx/store';
 import {
   catchError,
   concatMapTo,
+  delay,
+  exhaust,
   filter,
+  flatMap,
   map,
-  takeUntil
+  take,
+  takeUntil,
+  takeWhile,
+  tap,
+  timeout,
+  toArray
 } from 'rxjs/operators';
 import { DataService } from '../../core/services/data.service';
 
@@ -34,9 +43,21 @@ export class PokemonEffects {
       takeUntil(
         this.store
           .select(Selectors.selectPokemonIds)
-          .pipe(filter((res) => res.length === 151))
+          .pipe(filter((res) => res.length === environment.limit))
       ),
+      timeout(7500),
       catchError((e) => PokemonActions.loadPokemonIncrementalFail)
+    )
+  );
+
+  watch$ = createEffect(() =>
+    this.loadPokemonIncrementally$.pipe(
+      toArray(),
+      map((arr) =>
+        arr.length === environment.limit - 1
+          ? PokemonActions.loadPokemonIncrementalComplete()
+          : PokemonActions.loadPokemonIncrementalIncomplete()
+      )
     )
   );
 
