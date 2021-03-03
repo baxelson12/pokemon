@@ -14,6 +14,7 @@ $card-padding: $padding;
   background-color: $white;
   border-radius: $radius;
   box-shadow: $shadow-md;
+  width: 100%;
   @include sm() {
     box-sizing: content-box;
     width: $card-width;
