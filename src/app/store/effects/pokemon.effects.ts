@@ -5,15 +5,9 @@ import { Store } from '@ngrx/store';
 import {
   catchError,
   concatMapTo,
-  delay,
-  exhaust,
   filter,
-  flatMap,
   map,
-  take,
   takeUntil,
-  takeWhile,
-  tap,
   timeout,
   toArray
 } from 'rxjs/operators';
