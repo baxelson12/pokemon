@@ -9,7 +9,7 @@
     <bad-card [@enter]="animationConfig(i)" [@exit]="animationConfig(i)" *ngFor="let item of obs.loading; let i = index" [loading]="true"></bad-card>
   </div>
 
-  <div class="nothing" *ngIf="!obs.pokemon.length">
+  <div class="nothing" *ngIf="!obs.pokemon.length && !obs.loading.length">
     Nothing to see here :)
   </div>
 </ng-container>
