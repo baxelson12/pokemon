@@ -19,22 +19,22 @@ export function selectPokemonId(p: PokemonBase): number {
 }
 
 // Default sort by
-export function sortNameAsc(a: PokemonBase, b: PokemonBase): number {
-  return SortAscending(a.name, b.name);
+export function sortIdAsc(a: PokemonBase, b: PokemonBase): number {
+  return SortAscending(a.id, b.id);
 }
 
 // Generate adapter
 export const adapter: EntityAdapter<PokemonBase> = createEntityAdapter<PokemonBase>(
   {
     selectId: selectPokemonId,
-    sortComparer: sortNameAsc
+    sortComparer: sortIdAsc
   }
 );
 
 // Initial state
 export const initial: State = adapter.getInitialState({
   selectedPokemonId: null,
-  sortBy: 'nameAsc',
+  sortBy: 'idAsc',
   query: '',
   loading: [],
   loaded: false

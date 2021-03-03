@@ -51,13 +51,13 @@ export class ToolbarComponent implements OnDestroy {
   // Change the sort direction
   sort(sort: SortBy): void {
     switch (sort) {
-      case 'nameAsc':
-        this.store.dispatch(Actions.sortBy({ sortBy: 'nameDesc' }));
-        this.cs.setState({ sortBy: 'nameDesc' });
+      case 'idAsc':
+        this.store.dispatch(Actions.sortBy({ sortBy: 'idDesc' }));
+        this.cs.setState({ sortBy: 'idDesc' });
         break;
-      case 'nameDesc':
-        this.store.dispatch(Actions.sortBy({ sortBy: 'nameAsc' }));
-        this.cs.setState({ sortBy: 'nameAsc' });
+      case 'idDesc':
+        this.store.dispatch(Actions.sortBy({ sortBy: 'idAsc' }));
+        this.cs.setState({ sortBy: 'idAsc' });
         break;
     }
   }

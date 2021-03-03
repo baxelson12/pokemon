@@ -39,11 +39,11 @@ export const selectSortedPokemon = createSelector(
   selectPokemonState,
   (array, state) => {
     switch (state.sortBy) {
-      case 'nameAsc': {
-        return array.slice().sort((a, b) => SortAscending(a.name, b.name));
+      case 'idAsc': {
+        return array.slice().sort((a, b) => SortAscending(a.id, b.id));
       }
-      case 'nameDesc': {
-        return array.slice().sort((a, b) => SortDescending(a.name, b.name));
+      case 'idDesc': {
+        return array.slice().sort((a, b) => SortDescending(a.id, b.id));
       }
     }
   }

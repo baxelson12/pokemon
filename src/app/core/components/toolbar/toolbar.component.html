@@ -14,13 +14,13 @@
   <ng-container right *ngIf="sort$ | async as sortBy">
     <button bad-btn-ico (click)="sort(sortBy)">
       <svg-icon
-        *ngIf="sortBy === 'nameDesc'"
+        *ngIf="sortBy === 'idDesc'"
         src="assets/svg/sortAsc.svg"
         role="button"
         aria-label="Sort Ascending"
       ></svg-icon>
       <svg-icon
-        *ngIf="sortBy === 'nameAsc'"
+        *ngIf="sortBy === 'idAsc'"
         src="assets/svg/sortDesc.svg"
         role="button"
         aria-label="Ascending"
