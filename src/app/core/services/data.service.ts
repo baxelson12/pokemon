@@ -25,7 +25,7 @@ export class DataService {
    * Gets all first gen Pokemon at once.
    */
   all(): Observable<PokemonBase[]> {
-    const endpoint = `${environment.api}/pokemon?limit=151`;
+    const endpoint = `${environment.api}/pokemon?limit=${environment.limit}`;
     return this.http.get<ResultDTO>(endpoint).pipe(
       pluck('results'),
       mergeMap((res) => res),
@@ -88,7 +88,7 @@ export class DataService {
    * Gets all first gen Pokemon incrementally
    */
   increment(): Observable<PokemonBase> {
-    const endpoint = `${environment.api}/pokemon?limit=151`;
+    const endpoint = `${environment.api}/pokemon?limit=${environment.limit}`;
     return this.http.get<ResultDTO>(endpoint).pipe(
       pluck('results'),
       mergeMap((res) => res),

@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { inject, TestBed } from '@angular/core/testing';
 import { DataService } from './data.service';
+import { environment } from '../../../environments/environment';
 
 describe('DataService', () => {
   beforeEach(() => {
@@ -12,10 +13,10 @@ describe('DataService', () => {
   });
 
   describe('all', () => {
-    it('Should contain 151 pokemon.', (done) => {
+    it('Should contain xxx pokemon.', (done) => {
       inject([DataService], async (ds: DataService) => {
         const all = await ds.all().toPromise();
-        expect(all.length).toBe(151);
+        expect(all.length).toBe(environment.limit);
         done();
       })();
     });
