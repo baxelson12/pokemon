@@ -40,7 +40,7 @@ export class ToolbarComponent implements OnDestroy {
     private store: Store,
     private cs: ComponentStore<{ sortBy: SortBy }>
   ) {
-    this.cs.setState({ sortBy: 'nameAsc' });
+    this.cs.setState({ sortBy: 'idAsc' });
     this.subscription = this.form.valueChanges
       .pipe(debounceTime(100))
       .subscribe(({ query }) =>
