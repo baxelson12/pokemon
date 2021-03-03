@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { ComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { debounceTime, throttleTime } from 'rxjs/operators';
 import { InputComponent } from '../../../shared/components/input/input.component';
 import { SortBy } from '../../../shared/types/sortBy';
 
@@ -40,10 +41,12 @@ export class ToolbarComponent implements OnDestroy {
     private cs: ComponentStore<{ sortBy: SortBy }>
   ) {
     this.cs.setState({ sortBy: 'nameAsc' });
-    this.subscription = this.form.valueChanges.subscribe(({ query }) =>
-      // Keep store in sync
-      this.store.dispatch(Actions.queryBy({ query }))
-    );
+    this.subscription = this.form.valueChanges
+      .pipe(debounceTime(100))
+      .subscribe(({ query }) =>
+        // Keep store in sync
+        this.store.dispatch(Actions.queryBy({ query }))
+      );
   }
   // Change the sort direction
   sort(sort: SortBy): void {
