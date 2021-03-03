@@ -22,14 +22,4 @@ export class RadarComponent {
     }
   };
   chartType: ChartType = 'radar';
-  // labels: Label[] = [
-  //   'Eating',
-  //   'Drinking',
-  //   'Sleeping',
-  //   'Designing',
-  //   'Coding',
-  //   'Cycling',
-  //   'Running'
-  // ];
-  // data: ChartDataSets[] = [{ data: [65, 59, 90, 81, 56, 55, 40] }];
 }
