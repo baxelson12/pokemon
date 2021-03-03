@@ -1,9 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { concatMapTo, map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import {
+  catchError,
+  concatMapTo,
+  filter,
+  map,
+  takeUntil,
+  tap
+} from 'rxjs/operators';
 import { DataService } from '../../core/services/data.service';
 
 import * as PokemonActions from '../actions/pokemon.actions';
+import * as Selectors from '../selectors';
 
 @Injectable()
 export class PokemonEffects {
@@ -11,11 +20,31 @@ export class PokemonEffects {
     this.actions$.pipe(
       ofType(PokemonActions.loadPokemon),
       concatMapTo(this.ds.all()),
-      map((pokemon) => PokemonActions.loadPokemonSuccess({ pokemon }))
-      // wtf
-      //   catchError(e => of(PokemonActions.loadPokemonFail())
+      map((pokemon) => PokemonActions.loadPokemonSuccess({ pokemon })),
+      catchError((e) => PokemonActions.loadPokemonFail)
     )
   );
 
-  constructor(private actions$: Actions, private ds: DataService) {}
+  loadPokemonIncrementally$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PokemonActions.loadPokemonIncremental),
+      concatMapTo(this.ds.increment()),
+      map((pokemon) =>
+        PokemonActions.loadPokemonIncrementalSuccess({ pokemon })
+      ),
+      takeUntil(
+        this.store.select(Selectors.selectPokemonIds).pipe(
+          filter((res) => res.length === 151),
+          tap((_) => PokemonActions.loadPokemonIncrementalComplete())
+        )
+      ),
+      catchError((e) => PokemonActions.loadPokemonIncrementalFail)
+    )
+  );
+
+  constructor(
+    private actions$: Actions,
+    private ds: DataService,
+    private store: Store
+  ) {}
 }

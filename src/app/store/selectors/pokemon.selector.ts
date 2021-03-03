@@ -27,6 +27,12 @@ export const selectPokemonEntities = createSelector(
   FromReducer.selectPokemonEntities
 );
 
+// All Pokemon IDs
+export const selectPokemonIds = createSelector(
+  selectPokemonState,
+  FromReducer.selectPokemonIds
+);
+
 // Selected Pokemon
 export const selectedPokemon = createSelector(
   selectPokemonState,

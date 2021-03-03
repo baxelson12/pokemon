@@ -18,7 +18,7 @@ export class AppComponent {
   title = 'pokemon';
 
   constructor(private store: Store) {
-    this.store.dispatch(Actions.loadPokemon());
+    this.store.dispatch(Actions.loadPokemonIncremental());
   }
   // Router animations need state
   getRouterOutletState(o: RouterOutlet): Data {

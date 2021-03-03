@@ -54,6 +54,29 @@ export const pokemonReducer = createReducer(
   on(PokemonActions.loadPokemonSuccess, (state, { pokemon }) =>
     adapter.setAll(pokemon, { ...state, loaded: true, loading: [] })
   ),
+  // Begin incremental load
+  on(PokemonActions.loadPokemonIncremental, (state) => ({
+    ...state,
+    loading: [].constructor(1)
+  })),
+  // Add one increment
+  on(PokemonActions.loadPokemonIncrementalSuccess, (state, { pokemon }) =>
+    adapter.addOne(pokemon, state)
+  ),
+  // Incremental load complete
+  on(PokemonActions.loadPokemonIncrementalComplete, (state) => ({
+    ...state,
+    loading: [],
+    loaded: true
+  })),
+  // Incremental load fail
+  on(PokemonActions.loadPokemonIncrementalFail, (state) => ({ ...state })),
+  // Incremental load incomplete
+  on(PokemonActions.loadPokemonIncrementalIncomplete, (state) => ({
+    ...state,
+    loading: [],
+    loaded: false
+  })),
   // Select Pokemon
   on(PokemonActions.selectPokemon, (state, { id }) => ({
     ...state,
