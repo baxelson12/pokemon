@@ -4,3 +4,12 @@ $padding: 1.5rem;
   padding-top: $padding;
   padding-bottom: $padding;
 }
+
+svg-icon {
+  padding-right: 0.5rem;
+  box-sizing: content-box;
+}
+.loader {
+  height: 1.125rem;
+  width: 1.125rem;
+}

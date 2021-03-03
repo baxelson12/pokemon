@@ -1,5 +1,12 @@
 <bad-nav>
   <h1>First Gen. Pokemon</h1>
+
+  <svg-icon
+    class="loader"
+    [applyClass]="true"
+    src="assets/svg/rolling.svg"
+    *ngIf="loading$ | async"
+  ></svg-icon>
 </bad-nav>
 <app-toolbar></app-toolbar>
 

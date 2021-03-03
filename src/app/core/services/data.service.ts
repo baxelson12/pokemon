@@ -22,10 +22,10 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   /**
-   * Gets all first gen Pokemon
+   * Gets all first gen Pokemon at once.
    */
   all(): Observable<PokemonBase[]> {
-    const endpoint = `${environment.api}/pokemon?limit=151`;
+    const endpoint = `${environment.api}/pokemon?limit=${environment.limit}`;
     return this.http.get<ResultDTO>(endpoint).pipe(
       pluck('results'),
       mergeMap((res) => res),
@@ -81,6 +81,39 @@ export class DataService {
           stats: statRecord
         } as PokemonBase & PokemonDetailed;
       })
+    );
+  }
+
+  /**
+   * Gets all first gen Pokemon incrementally
+   */
+  increment(): Observable<PokemonBase> {
+    const endpoint = `${environment.api}/pokemon?limit=${environment.limit}`;
+    return this.http.get<ResultDTO>(endpoint).pipe(
+      pluck('results'),
+      mergeMap((res) => res),
+      pluck('url'),
+      // API not liking trailing slash
+      map((url) => url.slice(0, -1)),
+      concatMap((url) =>
+        this.http.get<PokemonDetailDTO>(url).pipe(
+          // Ease up on the server
+          delay(50),
+          catchError((err) => {
+            console.warn('Skipping a Pokemon.');
+            return EMPTY;
+          })
+        )
+      ),
+      map(
+        ({ id, name, types, sprites }) =>
+          ({
+            id,
+            name,
+            image: sprites.front_default,
+            type: types[0].type.name
+          } as PokemonBase)
+      )
     );
   }
 }

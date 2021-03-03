@@ -1,15 +1,12 @@
-<ng-container *ngIf="{ pokemon: pokemon$ | async, loading: loading$ | async } as obs">
+<ng-container *ngIf="pokemon$ | async as pokemon">
   <div class="wrapper">
     <app-pokemon
-      *ngFor="let pokemon of obs.pokemon; let i = index"
+      *ngFor="let pokemon of pokemon; let i = index"
       [@enter]="animationConfig(i)"
       [pokemon]="pokemon"
       [loading]="false"
     ></app-pokemon>
-    <bad-card [@enter]="animationConfig(i)" [@exit]="animationConfig(i)" *ngFor="let item of obs.loading; let i = index" [loading]="true"></bad-card>
   </div>
 
-  <div class="nothing" *ngIf="!obs.pokemon.length && !obs.loading.length">
-    Nothing to see here :)
-  </div>
+  <div class="nothing" *ngIf="!pokemon.length">Nothing to see here :)</div>
 </ng-container>

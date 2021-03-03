@@ -19,8 +19,6 @@ import * as Selectors from '../../store/selectors';
   ]
 })
 export class AllComponent {
-  // Loading state
-  loading$: Observable<null[]> = this.store.select(Selectors.pokemonLoading);
   // Actual
   pokemon$: Observable<PokemonBase[]> = this.store.select(
     Selectors.filterPokemon

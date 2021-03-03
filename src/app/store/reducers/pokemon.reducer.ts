@@ -7,7 +7,7 @@ import { SortAscending, SortDescending } from '../../shared/utils/sort';
 // Base model
 export interface State extends EntityState<PokemonBase> {
   selectedPokemonId: number | null;
-  loading: null[];
+  loading: boolean;
   loaded: boolean;
   sortBy: string;
   query: string;
@@ -19,24 +19,24 @@ export function selectPokemonId(p: PokemonBase): number {
 }
 
 // Default sort by
-export function sortNameAsc(a: PokemonBase, b: PokemonBase): number {
-  return SortAscending(a.name, b.name);
+export function sortIdAsc(a: PokemonBase, b: PokemonBase): number {
+  return SortAscending(a.id, b.id);
 }
 
 // Generate adapter
 export const adapter: EntityAdapter<PokemonBase> = createEntityAdapter<PokemonBase>(
   {
     selectId: selectPokemonId,
-    sortComparer: sortNameAsc
+    sortComparer: sortIdAsc
   }
 );
 
 // Initial state
 export const initial: State = adapter.getInitialState({
   selectedPokemonId: null,
-  sortBy: 'nameAsc',
+  sortBy: 'idAsc',
   query: '',
-  loading: [],
+  loading: false,
   loaded: false
 });
 
@@ -46,14 +46,41 @@ export const pokemonReducer = createReducer(
   // Begin load
   on(PokemonActions.loadPokemon, (state) => ({
     ...state,
-    loading: [].constructor(20)
+    loading: true
   })),
   // Loading failed
-  on(PokemonActions.loadPokemonFail, (state) => ({ ...state, loading: [] })),
+  on(PokemonActions.loadPokemonFail, (state) => ({ ...state, loading: false })),
   // Loaded
   on(PokemonActions.loadPokemonSuccess, (state, { pokemon }) =>
-    adapter.setAll(pokemon, { ...state, loaded: true, loading: [] })
+    adapter.setAll(pokemon, { ...state, loaded: true, loading: false })
   ),
+  // Begin incremental load
+  on(PokemonActions.loadPokemonIncremental, (state) => ({
+    ...state,
+    loading: true
+  })),
+  // Add one increment
+  on(PokemonActions.loadPokemonIncrementalSuccess, (state, { pokemon }) =>
+    adapter.addOne(pokemon, state)
+  ),
+  // Incremental load complete
+  on(PokemonActions.loadPokemonIncrementalComplete, (state) => ({
+    ...state,
+    loading: false,
+    loaded: true
+  })),
+  // Incremental load fail
+  on(PokemonActions.loadPokemonIncrementalFail, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false
+  })),
+  // Incremental load incomplete
+  on(PokemonActions.loadPokemonIncrementalIncomplete, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false
+  })),
   // Select Pokemon
   on(PokemonActions.selectPokemon, (state, { id }) => ({
     ...state,
