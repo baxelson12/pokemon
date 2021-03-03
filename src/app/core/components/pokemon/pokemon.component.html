@@ -3,9 +3,15 @@
   [id]="pokemon.id"
   [name]="pokemon.name"
   [loading]="loading"
+  img-alt="Picture of {{ pokemon.name }}"
 >
   <ng-container top>
-    <a bad-btn-ico role="button" [routerLink]="['',{ outlets: { dialog: ['detail', pokemon.id] } }]">
+    <a
+      aria-label="Details"
+      bad-btn-ico
+      role="button"
+      [routerLink]="['', { outlets: { dialog: ['detail', pokemon.id] } }]"
+    >
       <svg-icon src="assets/svg/info.svg"></svg-icon>
     </a>
   </ng-container>
