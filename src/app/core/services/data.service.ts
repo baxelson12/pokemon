@@ -37,7 +37,8 @@ export class DataService {
       // to replenish the array.
       concatMap((url) =>
         this.http.get<PokemonDetailDTO>(url).pipe(
-          delay(50),
+          // Ease up on the server
+          // delay(50),
           catchError((err) => {
             console.warn('Skipping a Pokemon.');
             return EMPTY;
