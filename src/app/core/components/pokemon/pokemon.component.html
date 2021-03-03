@@ -5,9 +5,9 @@
   [loading]="loading"
 >
   <ng-container top>
-    <button bad-btn-ico role="button">
+    <a bad-btn-ico role="button" [routerLink]="['',{ outlets: { dialog: ['detail', pokemon.id] } }]">
       <svg-icon src="assets/svg/info.svg"></svg-icon>
-    </button>
+    </a>
   </ng-container>
   <ng-container content>
     <span>Type: {{ pokemon.type }}</span>
