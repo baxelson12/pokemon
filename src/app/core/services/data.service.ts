@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import {
+  catchError,
   concatMap,
   delay,
   map,
@@ -31,7 +32,19 @@ export class DataService {
       pluck('url'),
       // API not liking trailing slash
       map((url) => url.slice(0, -1)),
-      concatMap((url) => this.http.get<PokemonDetailDTO>(url).pipe(delay(50))),
+      // This API is a bit weird... At times it will 404 on a url that -it- gave -me-
+      // there could be some logic here to save the errored IDs to the store, and then retry at a later time
+      // to replenish the array.
+      concatMap((url) =>
+        this.http.get<PokemonDetailDTO>(url).pipe(
+          // Ease up on the server
+          // delay(50),
+          catchError((err) => {
+            console.warn('Skipping a Pokemon.');
+            return EMPTY;
+          })
+        )
+      ),
       map(
         ({ id, name, types, sprites }) =>
           ({

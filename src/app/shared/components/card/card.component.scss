@@ -1,12 +1,10 @@
 @import 'variables', 'mixins';
 
 $card-padding: $padding;
-$card-width: 335px;
 
-h2 {
-  font-size: 1.125rem;
-  color: $black;
-  font-weight: bold;
+:host {
+  display: flex;
+  justify-content: center;
 }
 
 .card {
@@ -45,6 +43,7 @@ h2 {
   background-color: $red;
   height: 1.75rem;
   width: 1.75rem;
+  font-size: 0.6rem;
   @include flex-center();
   color: $white;
 }

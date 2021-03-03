@@ -5,16 +5,11 @@
 
 <div class="primary-outlet">
   <router-outlet></router-outlet>
-  <app-pokemon
-    type="Grass"
-    img="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
-    id="1"
-    name="Bulbasaur"
-    [loading]="false"
-  ></app-pokemon>
-  <!-- <bad-radar></bad-radar> -->
 </div>
 
-<!-- <bad-modal-plain>
-  <ng-container modal> Test </ng-container>
-</bad-modal-plain> -->
+<div
+  [@fadeInOnEnter]="getRouterOutletState(o)"
+  [@fadeOutOnLeave]="!getRouterOutletState(o)"
+>
+  <router-outlet #o="outlet" name="dialog"></router-outlet>
+</div>

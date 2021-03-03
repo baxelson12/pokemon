@@ -16,9 +16,17 @@ body {
 
 h1,
 h2,
+h3,
 button,
-input {
+input,
+a {
   all: unset;
+}
+
+h2 {
+  font-size: 1.125rem;
+  color: $black;
+  font-weight: bold;
 }
 
 body {

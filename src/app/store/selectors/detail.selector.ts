@@ -3,7 +3,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as FromReducer from '../reducers/detail.reducer';
 
 // State slice
-export const selectPokemonState = createFeatureSelector<FromReducer.State>(
+export const selectPokemonDetails = createFeatureSelector<FromReducer.State>(
   'details'
 );
 

@@ -17,8 +17,6 @@ export class RadarComponent {
     tooltips: { enabled: false },
     scale: {
       ticks: {
-        stepSize: 10,
-        max: 100,
         min: 0
       }
     }

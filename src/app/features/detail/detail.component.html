@@ -1,0 +1,25 @@
+<bad-modal-plain #modal="modal" *ngIf="details$ | async as details">
+    <ng-container modal>
+        <div class="wrapper">
+            <div class="actions">
+                <button (click)="modal.close()" bad-btn-ico role="button">
+                    <svg-icon src="assets/svg/close.svg"></svg-icon>
+                  </button>
+            </div>
+            <div class="data">
+                <div class="image">
+                    <img [src]="details.image">
+                </div>
+                <div class="text">
+                    <h2>{{details.name | titlecase}}</h2>
+                    <span>{{details.type | titlecase}} Pokemon</span>
+                    <div class="content">
+                        <span>Weight: {{details.weight}}</span>
+                        <span>Height: {{details.height}}</span>
+                    </div>
+                </div>
+            </div>
+            <bad-radar [labels]="labels$ | async" [data]="data$ | async"></bad-radar>
+        </div>
+    </ng-container>
+</bad-modal-plain>

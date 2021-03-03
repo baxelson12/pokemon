@@ -1,0 +1,9 @@
+@import 'variables', 'mixins';
+
+$min: calc(#{$card-width} + 0.5rem);
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min, 1fr));
+  gap: 1.25rem;
+}

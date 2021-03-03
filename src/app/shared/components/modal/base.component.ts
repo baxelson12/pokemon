@@ -21,7 +21,7 @@ export class BaseModal implements OnDestroy {
 
   close($event?: any): void {
     const e = $event ?? null;
-    this.r.navigate([{ outlets: { modal: null } }]);
+    this.r.navigate([{ outlets: { dialog: null } }]);
     this.modalClose.emit(e);
   }
 
