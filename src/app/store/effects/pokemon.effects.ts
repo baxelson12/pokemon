@@ -6,8 +6,7 @@ import {
   concatMapTo,
   filter,
   map,
-  takeUntil,
-  tap
+  takeUntil
 } from 'rxjs/operators';
 import { DataService } from '../../core/services/data.service';
 
@@ -33,10 +32,9 @@ export class PokemonEffects {
         PokemonActions.loadPokemonIncrementalSuccess({ pokemon })
       ),
       takeUntil(
-        this.store.select(Selectors.selectPokemonIds).pipe(
-          filter((res) => res.length === 151),
-          tap((_) => PokemonActions.loadPokemonIncrementalComplete())
-        )
+        this.store
+          .select(Selectors.selectPokemonIds)
+          .pipe(filter((res) => res.length === 151))
       ),
       catchError((e) => PokemonActions.loadPokemonIncrementalFail)
     )

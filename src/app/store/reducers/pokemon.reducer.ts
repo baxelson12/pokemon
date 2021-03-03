@@ -7,7 +7,7 @@ import { SortAscending, SortDescending } from '../../shared/utils/sort';
 // Base model
 export interface State extends EntityState<PokemonBase> {
   selectedPokemonId: number | null;
-  loading: null[];
+  loading: boolean;
   loaded: boolean;
   sortBy: string;
   query: string;
@@ -36,7 +36,7 @@ export const initial: State = adapter.getInitialState({
   selectedPokemonId: null,
   sortBy: 'idAsc',
   query: '',
-  loading: [],
+  loading: false,
   loaded: false
 });
 
@@ -46,18 +46,18 @@ export const pokemonReducer = createReducer(
   // Begin load
   on(PokemonActions.loadPokemon, (state) => ({
     ...state,
-    loading: [].constructor(20)
+    loading: true
   })),
   // Loading failed
-  on(PokemonActions.loadPokemonFail, (state) => ({ ...state, loading: [] })),
+  on(PokemonActions.loadPokemonFail, (state) => ({ ...state, loading: false })),
   // Loaded
   on(PokemonActions.loadPokemonSuccess, (state, { pokemon }) =>
-    adapter.setAll(pokemon, { ...state, loaded: true, loading: [] })
+    adapter.setAll(pokemon, { ...state, loaded: true, loading: false })
   ),
   // Begin incremental load
   on(PokemonActions.loadPokemonIncremental, (state) => ({
     ...state,
-    loading: [].constructor(1)
+    loading: true
   })),
   // Add one increment
   on(PokemonActions.loadPokemonIncrementalSuccess, (state, { pokemon }) =>
@@ -66,15 +66,19 @@ export const pokemonReducer = createReducer(
   // Incremental load complete
   on(PokemonActions.loadPokemonIncrementalComplete, (state) => ({
     ...state,
-    loading: [],
+    loading: false,
     loaded: true
   })),
   // Incremental load fail
-  on(PokemonActions.loadPokemonIncrementalFail, (state) => ({ ...state })),
+  on(PokemonActions.loadPokemonIncrementalFail, (state) => ({
+    ...state,
+    loading: false,
+    loaded: false
+  })),
   // Incremental load incomplete
   on(PokemonActions.loadPokemonIncrementalIncomplete, (state) => ({
     ...state,
-    loading: [],
+    loading: false,
     loaded: false
   })),
   // Select Pokemon
